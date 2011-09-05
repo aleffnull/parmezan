@@ -1,0 +1,1 @@
+Parmezan.Container - simple IoC/DI container for .NET 2.0.
