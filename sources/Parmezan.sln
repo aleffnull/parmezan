@@ -1,7 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parmezan.Container", "Parmezan.Container\Parmezan.Container.csproj", "{27B1127F-A305-430F-B283-08B2BF2FAA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parmezan.Tests", "Parmezan.Tests\Parmezan.Tests.csproj", "{96224BED-9042-43CD-8D76-FBDB3136581D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27B1127F-A305-430F-B283-08B2BF2FAA4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B1127F-A305-430F-B283-08B2BF2FAA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B1127F-A305-430F-B283-08B2BF2FAA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B1127F-A305-430F-B283-08B2BF2FAA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96224BED-9042-43CD-8D76-FBDB3136581D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96224BED-9042-43CD-8D76-FBDB3136581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96224BED-9042-43CD-8D76-FBDB3136581D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96224BED-9042-43CD-8D76-FBDB3136581D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
