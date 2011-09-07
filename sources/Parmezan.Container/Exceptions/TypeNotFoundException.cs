@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Parmezan.Container.Exceptions
 {
+	[Serializable]
 	public class TypeNotFoundException : Exception
 	{
 		#region Constructors
