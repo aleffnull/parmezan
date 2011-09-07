@@ -121,4 +121,10 @@
     <value>Type {0} was not found in container</value>
     <comment>0 is string representation of a type</comment>
   </data>
+	<data name="NoConstructorsFound">
+		<value xml:space="preserve">No available constructors were found for {0}</value>
+		<comment>
+			0 is string representation of a type
+		</comment>
+	</data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Parmezan.Container.Exceptions;
 using Parmezan.Container.Properties;
 
@@ -29,17 +30,43 @@ namespace Parmezan.Container
 		public T Resolve<T>()
 		{
 			var type = typeof(T);
+			var obj = (T)Resolve(type);
+
+			return obj;
+		}
+
+		#endregion Methods
+
+		#region Helpers
+
+		private object Resolve(Type type)
+		{
 			if (!types.ContainsKey(type))
 			{
 				throw new TypeNotFoundException(string.Format(Resources.TypeNotFoundExceptionMessage, type));
 			}
 
 			var implType = types[type];
-			var obj = (T)Activator.CreateInstance(implType);
+			var constructors = implType.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+			if (constructors.Length == 0)
+			{
+				throw new InvalidOperationException(string.Format(Resources.NoConstructorsFound, implType));
+			}
+
+			// Use the first constructor by default.
+			var constructor = constructors[0];
+			var formalParameters = constructors[0].GetParameters();
+			var actualParameters = new object[formalParameters.Length];
+			for (var i = 0; i < formalParameters.Length; i++)
+			{
+				var parameterValue = Resolve(formalParameters[i].ParameterType);
+				actualParameters[i] = parameterValue;
+			}
+			var obj = constructor.Invoke(actualParameters);
 
 			return obj;
 		}
 
-		#endregion Methods
+		#endregion Helpers
 	}
 }

@@ -61,6 +61,15 @@ namespace Parmezan.Container.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No available constructors were found for {0}.
+        /// </summary>
+        internal static string NoConstructorsFound {
+            get {
+                return ResourceManager.GetString("NoConstructorsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type {0} was not found in container.
         /// </summary>
         internal static string TypeNotFoundExceptionMessage {
