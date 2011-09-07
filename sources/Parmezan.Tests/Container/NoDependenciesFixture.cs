@@ -21,10 +21,28 @@ namespace Parmezan.Tests.Container
 		}
 
 		[Test]
+		public void CanResolveByInterface()
+		{
+			var box = new Box();
+			box.Register<ISomething, Something>();
+
+			var resolvedObject = box.Resolve<ISomething>();
+			Assert.That(resolvedObject, Is.Not.Null);
+		}
+
+		[Test]
 		public void ResolvingOfNotRegisteredClassThrowsException()
 		{
 			var box = new Box();
 			Assert.That(() => box.Resolve<NoDependenciesClass>(), Throws.InstanceOf<TypeNotFoundException>());
+		}
+
+		[Test]
+		public void ResolvingByClassIfRegisteredByInterfaceThrowsException()
+		{
+			var box = new Box();
+			box.Register<ISomething, Something>();
+			Assert.That(() => box.Resolve<Something>(), Throws.InstanceOf<TypeNotFoundException>());
 		}
 
 		#endregion Tests

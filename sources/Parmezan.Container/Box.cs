@@ -21,6 +21,11 @@ namespace Parmezan.Container
 			types.Add(type, type);
 		}
 
+		public void Register<TInterface, TImplementation>()
+		{
+			types.Add(typeof(TInterface), typeof(TImplementation));
+		}
+
 		public T Resolve<T>()
 		{
 			var type = typeof(T);

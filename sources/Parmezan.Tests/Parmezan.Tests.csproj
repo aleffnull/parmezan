@@ -39,7 +39,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container\Classes\ISomething.cs" />
     <Compile Include="Container\Classes\NoDependenciesClass.cs" />
+    <Compile Include="Container\Classes\Something.cs" />
     <Compile Include="Container\GeneralFixture.cs" />
     <Compile Include="Container\NoDependenciesFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
