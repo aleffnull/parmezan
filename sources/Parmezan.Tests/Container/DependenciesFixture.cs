@@ -33,6 +33,20 @@ namespace Parmezan.Tests.Container
 			Assert.That(obj.FirstDependency, Is.Not.Null);
 		}
 
+		[Test]
+		public void CanResolveClassWithTwoDependencyLevels()
+		{
+			var box = new Box();
+			box.Register<TopLevelClass>();
+			box.Register<FirstLevelDependency>();
+			box.Register<SecondLevelDependency>();
+
+			var obj = box.Resolve<TopLevelClass>();
+			Assert.That(obj, Is.Not.Null);
+			Assert.That(obj.FirstLevelDependency, Is.Not.Null);
+			Assert.That(obj.FirstLevelDependency.SecondLevelDependency, Is.Not.Null);
+		}
+
 		#endregion Tests
 	}
 }
