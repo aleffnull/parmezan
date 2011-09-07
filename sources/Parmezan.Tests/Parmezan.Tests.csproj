@@ -41,9 +41,11 @@
   <ItemGroup>
     <Compile Include="Container\Classes\FirstDependencyClass.cs" />
     <Compile Include="Container\Classes\ISomething.cs" />
+    <Compile Include="Container\Classes\ISomethingWithDependency.cs" />
     <Compile Include="Container\Classes\NoDependenciesClass.cs" />
     <Compile Include="Container\Classes\OneDependencyClass.cs" />
     <Compile Include="Container\Classes\Something.cs" />
+    <Compile Include="Container\Classes\SomethingWithDependency.cs" />
     <Compile Include="Container\DependenciesFixture.cs" />
     <Compile Include="Container\GeneralFixture.cs" />
     <Compile Include="Container\NoDependenciesFixture.cs" />

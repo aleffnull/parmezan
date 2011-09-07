@@ -21,6 +21,18 @@ namespace Parmezan.Tests.Container
 			Assert.That(obj.FirstDependency, Is.Not.Null);
 		}
 
+		[Test]
+		public void CanResolveClassWithOneDependencyByInterface()
+		{
+			var box = new Box();
+			box.Register<FirstDependencyClass>();
+			box.Register<ISomethingWithDependency, SomethingWithDependency>();
+
+			var obj = box.Resolve<ISomethingWithDependency>();
+			Assert.That(obj, Is.Not.Null);
+			Assert.That(obj.FirstDependency, Is.Not.Null);
+		}
+
 		#endregion Tests
 	}
 }
