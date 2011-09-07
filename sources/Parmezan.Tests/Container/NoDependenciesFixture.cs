@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Parmezan.Container;
+using Parmezan.Container.Exceptions;
 using Parmezan.Tests.Container.Classes;
 
 namespace Parmezan.Tests.Container
@@ -17,6 +18,13 @@ namespace Parmezan.Tests.Container
 
 			var resolvedObj = box.Resolve<NoDependenciesClass>();
 			Assert.That(resolvedObj, Is.Not.Null);
+		}
+
+		[Test]
+		public void ResolvingOfNotRegisteredClassThrowsException()
+		{
+			var box = new Box();
+			Assert.That(() => box.Resolve<NoDependenciesClass>(), Throws.InstanceOf<TypeNotFoundException>());
 		}
 
 		#endregion Tests
