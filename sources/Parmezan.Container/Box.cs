@@ -16,13 +16,13 @@ namespace Parmezan.Container
 
 		#region Methods
 
-		public void Register<T>()
+		public void Register<T>(LifeStyle lifeStyle = LifeStyle.SingleForContainer)
 		{
 			var type = typeof(T);
 			types.Add(type, type);
 		}
 
-		public void Register<TInterface, TImplementation>()
+		public void Register<TInterface, TImplementation>(LifeStyle lifeStyle = LifeStyle.SingleForContainer)
 		{
 			types.Add(typeof(TInterface), typeof(TImplementation));
 		}

@@ -51,6 +51,7 @@
     <Compile Include="Container\Classes\TopLevelClass.cs" />
     <Compile Include="Container\DependenciesFixture.cs" />
     <Compile Include="Container\GeneralFixture.cs" />
+    <Compile Include="Container\LifeStyleFixture.cs" />
     <Compile Include="Container\NoDependenciesFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
