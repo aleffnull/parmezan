@@ -77,5 +77,14 @@ namespace Parmezan.Container.Properties {
                 return ResourceManager.GetString("TypeNotFoundExceptionMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown enumeration value: {0}..
+        /// </summary>
+        internal static string UnknownEnumerationValue {
+            get {
+                return ResourceManager.GetString("UnknownEnumerationValue", resourceCulture);
+            }
+        }
     }
 }

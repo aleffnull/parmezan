@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Parmezan.Container.Exceptions;
+using Parmezan.Container.Helpers;
 using Parmezan.Container.Properties;
 
 namespace Parmezan.Container
@@ -10,7 +11,7 @@ namespace Parmezan.Container
 	{
 		#region Fields
 
-		private readonly Dictionary<Type, Type> types = new Dictionary<Type, Type>();
+		private readonly Dictionary<Type, ImplementationInformation> types = new Dictionary<Type, ImplementationInformation>();
 
 		#endregion Fields
 
@@ -19,12 +20,14 @@ namespace Parmezan.Container
 		public void Register<T>(LifeStyle lifeStyle = LifeStyle.SingleForContainer)
 		{
 			var type = typeof(T);
-			types.Add(type, type);
+			var implInfo = new ImplementationInformation(type, lifeStyle);
+			types.Add(type, implInfo);
 		}
 
 		public void Register<TInterface, TImplementation>(LifeStyle lifeStyle = LifeStyle.SingleForContainer)
 		{
-			types.Add(typeof(TInterface), typeof(TImplementation));
+			var impleInfo = new ImplementationInformation(typeof(TImplementation), lifeStyle);
+			types.Add(typeof(TInterface), impleInfo);
 		}
 
 		public T Resolve<T>()
@@ -46,11 +49,33 @@ namespace Parmezan.Container
 				throw new TypeNotFoundException(string.Format(Resources.TypeNotFoundExceptionMessage, type));
 			}
 
-			var implType = types[type];
-			var constructors = implType.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+			var implTypeInfo = types[type];
+			object obj;
+			switch (implTypeInfo.LifeStyle)
+			{
+				case LifeStyle.NewPerResolve:
+					obj = ConstructNewInstance(implTypeInfo.Type);
+					break;
+				case LifeStyle.SingleForContainer:
+					if (implTypeInfo.Instance == null)
+					{
+						implTypeInfo.Instance = ConstructNewInstance(implTypeInfo.Type);
+					}
+					obj = implTypeInfo.Instance;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(string.Format(Resources.UnknownEnumerationValue, implTypeInfo.LifeStyle));
+			}
+
+			return obj;
+		}
+
+		private object ConstructNewInstance(Type type)
+		{
+			var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
 			if (constructors.Length == 0)
 			{
-				throw new InvalidOperationException(string.Format(Resources.NoConstructorsFound, implType));
+				throw new InvalidOperationException(string.Format(Resources.NoConstructorsFound, type));
 			}
 
 			// Use the first constructor by default.
